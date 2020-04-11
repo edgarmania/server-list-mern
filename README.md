@@ -16,9 +16,10 @@ The passwords and other secrets will be kept in .env file.  Docker will parse th
 MONGO_URI=db:27017/db?authSource=admin
 PORT=4000
 MONGO_PORT=27017
-MONGO_ROOT_USERNAME=your-user-name-here
-MONGO_ROOT_PASSWORD=your-user-names-password-here
+MONGO_INITDB_ROOT_USERNAME=your-user-name-here
+MONGO_INITDB_ROOT_PASSWORD=your-user-names-password-here
 NODE_ENV=production
 ```
 
+    To start: docker-compose -f test-docker-compose.yml up --build
 # Production Env

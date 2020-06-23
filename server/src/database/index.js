@@ -9,6 +9,8 @@ const options = {
     useUnifiedTopology: true
 }
 
+console.log(`MongoUri = ${mongoUri}`)
+
 mongoose
     .connect (mongoUri, options )
     .catch( e=> {

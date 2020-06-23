@@ -1,16 +1,15 @@
 # Build in this container
-FROM node:10.9.0-alpine as builder
+FROM node as builder
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+WORKDIR /app/client
 
-COPY package* /usr/src/app
-COPY yarn* /usr/src/app
+COPY package* /app/client/
+COPY yarn* /app/client/
 
 # Set production flag so dev dependencies aren't installed
 RUN yarn install --production=true
 
-COPY . /usr/src/app
+COPY . /app/client/
 
 # Build the production build
 RUN yarn build
@@ -23,9 +22,9 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy the react build from the build container
-COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+COPY --from=builder /app/client/build /usr/share/nginx/html
 
 # Set permissions so nginx can serve it
 RUN chown nginx.nginx /usr/share/nginx/html/ -R
 
-EXPOSE 80
+EXPOSE 3000

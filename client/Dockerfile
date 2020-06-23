@@ -1,5 +1,5 @@
 # Build in this container
-FROM node as builder
+FROM node:12.18.1-alpine3.12 as builder
 
 WORKDIR /app/client
 
